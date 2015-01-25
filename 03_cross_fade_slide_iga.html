@@ -13,16 +13,17 @@ $(function(){
   $('.slide ul li:first').addClass('active').show();
   //任意時間毎に処理を繰り返す
   setInterval(function(){
-    console.log($('.slide ul li.active').length);
-    if($('.slide ul li.active').next('li').length != 0){
-      //.activeをフェードアウトしてクラス名activeを削除、その次のliをフェードインしてクラス名activeを加える。
-      $('.slide ul li.active').fadeOut().removeClass('active').next('li').fadeIn().addClass('active');
+  console.log($('.slide ul li.active').next('li').length);
+    // $ はじまりの変数はjQueryオブジェクトを指すコーディング規則
+    var $active = $('.slide ul li.active');
+    var $next;
+    if($active.next('li').length != 0){
+      $next = $active.next('li');
     } else {
-      //.activeをフェードアウトしてクラス名activeを削除。
-		  $('.slide ul li.active').fadeOut().removeClass('active');
-      //一番最初のliをフェードインしてクラス名activeを加える。
-      $('.slide ul li:first').fadeIn().addClass('active');
+      $next = $('.slide ul li:first');
     }
+    $active.fadeOut().removeClass('active')
+    $next.fadeIn().addClass('active');
   }, 2000);
 });
 </script>
